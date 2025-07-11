@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -12,12 +13,54 @@ public class UIMananger : MonoBehaviour
     // UIMananger 클래스 내부에 추가
     public TextMeshProUGUI dialogText; // Inspector에서 할당
     public TextMeshProUGUI scoreText;
+    public GameObject dialogBox;
+    public GameObject answerBasket;
+
+    public int realAnswer; // 실제 정답
+    string winText;
+    string loseText;
+
 
     private Dialog dialog;
 
-    
+
+    public void ActiveDialogText()
+    {
+            dialogBox.gameObject.SetActive(true);
+    }
+    public void UnActiveDialogText()
+    {
+        dialogBox.gameObject.SetActive(false);
+    }
+
+    public void ActiveAnswerBasket()
+    {
+        answerBasket.gameObject.SetActive(true);
+    }
+    public void UnActiveAnswerBasket()
+    {
+        answerBasket.gameObject.SetActive(false);
+    }
 
 
+    public void PushAnswer()
+    {
+
+        if (GameManager.instance.currentAnswer == realAnswer)
+        {
+            GameManager.instance.IncreaseScore(); // 점수 증가
+
+            Debug.Log("정답입니다! 점수가 증가했습니다.");
+            dialogText.text = winText; // 승리 메시지 출력
+
+
+        }
+        else
+        {
+            Debug.Log("붕슨.");
+            dialogText.text = loseText; // 승리 메시지 출력
+        }
+    }
     private void Awake()
     {
         if (instance == null)
@@ -34,12 +77,22 @@ public class UIMananger : MonoBehaviour
     }
     public void ShowRandomDialog(int level)
     {
-        string text = dialog.GetRandomDialog(level);
-        if (dialogText != null)
-            dialogText.text = text;
+        DialogEntry entry = dialog.GetRandomDialog(level);
+
+        realAnswer = entry.Value; 
+
+        if (entry != null && dialogText != null)
+            dialogText.text = entry.Text; // 대사만 출력
+
+        winText = entry.WinText; // 승리 메시지 저장
+        loseText = entry.LoseText; // 패배 메시지 저장
+
     }
 
     
+
+
+
     private void Update()
     {
         

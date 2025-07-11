@@ -41,6 +41,7 @@ public class RecipeManager : MonoBehaviour
     public GameObject SBDoughnut;
     public GameObject SpiderMuffin;
 
+
     public void SC()
     {
         if (Spider.activeSelf)
@@ -109,7 +110,7 @@ public class RecipeManager : MonoBehaviour
         Debug.Log("엘프숲의 딸기를 재료로 사용했습니다.");
         Berry.SetActive(true);
     }
-
+    
     public void Synthesis()
     {
         if (SpiderCheese == true && FrogEye == true && StarwBerry == false)
@@ -198,6 +199,17 @@ public class RecipeManager : MonoBehaviour
         Debug.Log("도마의 정 상 화");
     }
 
+
+
+    /*
+     자신감을 주는 과일케이크 (공포)3
+        희망을 주는 치즈식빵 (무기력)4
+        용기를 복돋아주는 피자빵 (좌절)2
+        자존감의 딸기 도넛 (열등)5
+        안정의 도넛.(불안)1
+        진정의 개구리머핀(분노)6
+     
+     */
     public void Bake()
     {
         if (SpiderCheese == true && FrogEye == true && StarwBerry == false)
@@ -220,6 +232,8 @@ public class RecipeManager : MonoBehaviour
             SM = false;
 
             Debug.Log("안정의 도넛이 구워졌습니다.");
+            GameManager.instance.currentAnswer = 1;
+            UIMananger.instance.ActiveAnswerBasket();
         }
         else if (SpiderCheese == true && FrogEye == false && StarwBerry == false)
         {
@@ -241,6 +255,8 @@ public class RecipeManager : MonoBehaviour
             SM = false;
 
             Debug.Log("희망을 주는 치즈식빵이 구워졌습니다.");
+            GameManager.instance.currentAnswer = 4;
+            UIMananger.instance.ActiveAnswerBasket();
         }
         else if (SpiderCheese == true && FrogEye == false && StarwBerry == true)
         {
@@ -262,6 +278,8 @@ public class RecipeManager : MonoBehaviour
             SM = false;
 
             Debug.Log("용기를 복돋아주는 피자빵이 구워졌습니다.");
+            GameManager.instance.currentAnswer = 2;
+            UIMananger.instance.ActiveAnswerBasket();
         }
         else if (SpiderCheese == false && FrogEye == false && StarwBerry == true)
         {
@@ -283,6 +301,8 @@ public class RecipeManager : MonoBehaviour
             SM = false;
 
             Debug.Log("자존감의 딸기 도넛이 구워졌습니다.");
+            GameManager.instance.currentAnswer = 5;
+            UIMananger.instance.ActiveAnswerBasket();
         }
         else if (SpiderCheese == false && FrogEye == true && StarwBerry == true)
         {
@@ -304,6 +324,8 @@ public class RecipeManager : MonoBehaviour
             SM = false;
 
             Debug.Log("자신감을 주는 과일케이크가 구워졌습니다.");
+            GameManager.instance.currentAnswer = 3;
+            UIMananger.instance.ActiveAnswerBasket();
         }
         else if (SpiderCheese == false && FrogEye == true && StarwBerry == false)
         {
@@ -324,7 +346,9 @@ public class RecipeManager : MonoBehaviour
             CB = false;
             SBD = false;
 
-            Debug.Log("진정의 거미머핀이 구워졌습니다.");
+            Debug.Log("진정의 깍구리머핀이 구워졌습니다.");
+            GameManager.instance.currentAnswer = 6;
+            UIMananger.instance.ActiveAnswerBasket();
         }
 
     }

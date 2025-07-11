@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public int npcLevel = 1;
     public int score;
+    public int currentAnswer = 0;
+    public bool isCorrectAnswer = false;
 
     public float MaxTime;
     public float CurTIme;
@@ -17,9 +20,8 @@ public class GameManager : MonoBehaviour
     {
         
         
-            instance = this;
-            
-        
+        instance = this;
+        SetNpcLevelByScene();
 
         Init();
     }
@@ -41,16 +43,6 @@ public class GameManager : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
-
     void Init()
     {
         score = 0;
@@ -59,9 +51,9 @@ public class GameManager : MonoBehaviour
         CurTIme = 0f;
     }
 
-    void IncreaseScore()
+    public void IncreaseScore()
     {
-        score += 100 * npcLevel;
+        score += 100;
 
     }
 
@@ -70,4 +62,25 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0f;
         isGameOver = true;
     }
+
+    void SetNpcLevelByScene()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        switch (sceneName)
+        {
+            case "Level1":
+                npcLevel = 1;
+                break;
+            case "Level2":
+                npcLevel = 2;
+                break;
+            case "Level3":
+                npcLevel = 3;
+                break;
+            default:
+                npcLevel = 1;
+                break;
+        }
+    }
+
 }

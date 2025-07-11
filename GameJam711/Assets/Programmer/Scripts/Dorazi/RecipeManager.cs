@@ -158,7 +158,7 @@ public class RecipeManager : MonoBehaviour
             Frog.SetActive(false);
             Berry.SetActive(false);
             Dough.SetActive(true);
-            Debug.Log("진정의 거미머핀반죽을 만들었습니다.");
+            Debug.Log("진정의 개구리머핀반죽을 만들었습니다.");
         }
         else if (SpiderCheese == false && FrogEye == false && StarwBerry == true)
         {

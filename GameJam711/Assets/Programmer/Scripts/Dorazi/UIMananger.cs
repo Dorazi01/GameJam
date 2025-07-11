@@ -45,13 +45,14 @@ public class UIMananger : MonoBehaviour
 
     public void PushAnswer()
     {
-
+        Debug.Log($"winText: {winText}, loseText: {loseText}");
         if (GameManager.instance.currentAnswer == realAnswer)
         {
             GameManager.instance.IncreaseScore(); // 점수 증가
 
             Debug.Log("정답입니다! 점수가 증가했습니다.");
             dialogText.text = winText; // 승리 메시지 출력
+
 
 
         }

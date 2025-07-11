@@ -1,10 +1,11 @@
 using Mono.Cecil.Cil;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class NPCBehaviour : MonoBehaviour
 {
-
+    public Sprite sptriter;
     private void Awake()
     {
         Invoke("DestroyNPC", 40f);
@@ -13,6 +14,14 @@ public class NPCBehaviour : MonoBehaviour
 
         UIMananger.instance.ShowRandomDialog(GameManager.instance.npcLevel);
     }
+
+    void Start()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        //spriteRenderer.sprite = sprite;
+        spriteRenderer.sortingOrder = 1;
+    }
+
     void DestroyNPC()
     {
         NPCspawnmanager.instance.isSpawned = false; // NPC가 제거되었음을 표시

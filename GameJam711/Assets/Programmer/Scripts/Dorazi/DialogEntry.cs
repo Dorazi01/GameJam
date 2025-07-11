@@ -11,7 +11,7 @@ public class DialogEntry
     {
         Text = text;
         Value = value;
-        WinText = text;
+        WinText = winText;
         LoseText = loseText;
     }
 }

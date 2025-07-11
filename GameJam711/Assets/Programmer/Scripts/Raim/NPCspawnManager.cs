@@ -30,7 +30,6 @@ public class NPCspawnmanager : MonoBehaviour
     GameObject SpawnNPC(Vector3 spawnPos)
     {
         GameObject npc = Instantiate(npcPrefab, spawnPos, Quaternion.identity);
-        Debug.Log("NPC »ý¼º!");
         return npc;
     }
 }

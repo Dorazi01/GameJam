@@ -9,6 +9,15 @@ public class UIMananger : MonoBehaviour
     public RectTransform domaBackGround;
     public static UIMananger instance;
 
+    // UIMananger 클래스 내부에 추가
+    public TextMeshProUGUI dialogText; // Inspector에서 할당
+    public TextMeshProUGUI scoreText;
+
+    private Dialog dialog;
+
+    
+
+
     private void Awake()
     {
         if (instance == null)
@@ -20,11 +29,17 @@ public class UIMananger : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        dialog = new Dialog(); // Dialog 인스턴스 생성
+    }
+    public void ShowRandomDialog(int level)
+    {
+        string text = dialog.GetRandomDialog(level);
+        if (dialogText != null)
+            dialogText.text = text;
     }
 
     
-    public TextMeshProUGUI scoreText;
-
     private void Update()
     {
         

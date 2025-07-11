@@ -1,10 +1,19 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCBehaviour : MonoBehaviour
 {
     private void Awake()
     {
-        Invoke("DestroyNPC", 40f);
+        Invoke("DestroyNPC", 3f);
+
+
+        
+        UIMananger.instance.ShowRandomDialog(GameManager.instance.npcLevel);
+
+        
+
+
     }
     void DestroyNPC()
     {
@@ -12,4 +21,8 @@ public class NPCBehaviour : MonoBehaviour
         NPCspawnmanager.instance.spawnCooldown = 5f; // 쿨타임 초기화
         Destroy(gameObject);
     }
+
+
+    
+
 }

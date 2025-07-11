@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int npcLevel;
+    public int npcLevel = 1;
     public int score;
 
     public float MaxTime;

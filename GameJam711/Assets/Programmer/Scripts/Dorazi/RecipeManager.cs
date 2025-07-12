@@ -21,6 +21,16 @@ public class RecipeManager : MonoBehaviour
         개구리알 = 개구리알 머핀
      */
 
+    //이거 어제도 말했었던건데 음식 자체에 속성(공포)을 넣는게 아니라 원하는거 만들어 주고, 거기에 후첨가로 라벤더 이런걸 넣으면 된다 생각함
+    //문제가 이렇게하면 6X6이라 36인데, 속성 칸을 따로 하나로 만들어서, 음식에 속성을 넣는게 아니라, 음식은 음식대로 만들고, 속성은 속성대로 넣는게 좋을듯
+    //결론 : 여기다 빈 정보 칸 하나 만들고, 그거 맞는지에 따라 파악하면될듯
+
+    //너가 해줘야 할 것 : 대사 정하긴데, 존나늘었음 수고
+
+
+
+    
+
     public bool SpiderCheese = false;
     public bool FrogEye = false;
     public bool StarwBerry = false;
@@ -30,12 +40,13 @@ public class RecipeManager : MonoBehaviour
     public bool CB = false;
     public bool SBD = false;
     public bool SM = false;
+    public bool dough = false;
 
     public GameObject Dough;
     public GameObject Spider;
     public GameObject Frog;
     public GameObject Berry;
-    public GameObject Doughnut;
+    public GameObject FrogPie;
     public GameObject PizzaBread;
     public GameObject FruitCake;
     public GameObject CheeseBread;
@@ -69,7 +80,7 @@ public class RecipeManager : MonoBehaviour
             Debug.Log("이미 반죽이 완성 되었습니다.");
             return;
         }
-        if (Doughnut.activeSelf || PizzaBread.activeSelf || FruitCake.activeSelf || CheeseBread.activeSelf || SBDoughnut.activeSelf || SpiderMuffin.activeSelf)
+        if (FrogPie.activeSelf || PizzaBread.activeSelf || FruitCake.activeSelf || CheeseBread.activeSelf || SBDoughnut.activeSelf || SpiderMuffin.activeSelf)
         {
             Debug.Log("이미 빵을 구우셨습니다.");
             return;
@@ -93,7 +104,7 @@ public class RecipeManager : MonoBehaviour
             Debug.Log("이미 반죽이 완성 되었습니다.");
             return;
         }
-        if (Doughnut.activeSelf || PizzaBread.activeSelf || FruitCake.activeSelf || CheeseBread.activeSelf || SBDoughnut.activeSelf || SpiderMuffin.activeSelf)
+        if (FrogPie.activeSelf || PizzaBread.activeSelf || FruitCake.activeSelf || CheeseBread.activeSelf || SBDoughnut.activeSelf || SpiderMuffin.activeSelf)
         {
             Debug.Log("이미 빵을 구우셨습니다.");
             return;
@@ -115,7 +126,7 @@ public class RecipeManager : MonoBehaviour
             Debug.Log("이미 반죽이 완성 되었습니다.");
             return;
         }
-        if (Doughnut.activeSelf || PizzaBread.activeSelf || FruitCake.activeSelf || CheeseBread.activeSelf || SBDoughnut.activeSelf || SpiderMuffin.activeSelf)
+        if (FrogPie.activeSelf || PizzaBread.activeSelf || FruitCake.activeSelf || CheeseBread.activeSelf || SBDoughnut.activeSelf || SpiderMuffin.activeSelf)
         {
             Debug.Log("이미 빵을 구우셨습니다.");
             return;
@@ -128,6 +139,7 @@ public class RecipeManager : MonoBehaviour
     
     public void Synthesis()
     {
+        dough = true;
         RawDough.SetActive(false);
         UIMananger.instance.RawDoughCreate = false;
         if (SpiderCheese == true && FrogEye == true && StarwBerry == false)
@@ -139,7 +151,7 @@ public class RecipeManager : MonoBehaviour
 
 
 
-            Debug.Log("안정의 도넛반죽을 만들었습니다.");
+            Debug.Log("도넛반죽을 만들었습니다.");
         }
         else if (SpiderCheese == false && FrogEye == true && StarwBerry == true)
         {
@@ -149,7 +161,7 @@ public class RecipeManager : MonoBehaviour
             Dough.SetActive(true);
 
 
-            Debug.Log("자신감을 주는 과일케이크 반죽을 만들었습니다.");
+            Debug.Log("과일케이크 반죽을 만들었습니다.");
         }
         else if (SpiderCheese == true && FrogEye == false && StarwBerry == true)
         {
@@ -159,7 +171,7 @@ public class RecipeManager : MonoBehaviour
             Dough.SetActive(true);
 
 
-            Debug.Log("용기를 복돋아주는 피자빵 반죽을 만들었습니다.");
+            Debug.Log(" 피자빵 반죽을 만들었습니다.");
         }
         else if (SpiderCheese == true && FrogEye == false && StarwBerry == false)
         {
@@ -167,7 +179,7 @@ public class RecipeManager : MonoBehaviour
             Frog.SetActive(false);
             Berry.SetActive(false);
             Dough.SetActive(true);
-            Debug.Log("희망을 주는 치즈식빵반죽을 만들었습니다.");
+            Debug.Log("치즈식빵반죽을 만들었습니다.");
         }
         else if (SpiderCheese == false && FrogEye == true && StarwBerry == false)
         {
@@ -175,7 +187,7 @@ public class RecipeManager : MonoBehaviour
             Frog.SetActive(false);
             Berry.SetActive(false);
             Dough.SetActive(true);
-            Debug.Log("진정의 개구리머핀반죽을 만들었습니다.");
+            Debug.Log("개구리머핀반죽을 만들었습니다.");
         }
         else if (SpiderCheese == false && FrogEye == false && StarwBerry == true)
         {
@@ -183,7 +195,7 @@ public class RecipeManager : MonoBehaviour
             Frog.SetActive(false);
             Berry.SetActive(false);
             Dough.SetActive(true);
-            Debug.Log("자존감의 딸기 도넛반죽을 만들었습니다.");
+            Debug.Log("딸기 도넛반죽을 만들었습니다.");
         }
 
 
@@ -191,7 +203,7 @@ public class RecipeManager : MonoBehaviour
 
     public void Reset()
     {
-
+        dough = false;
         FrogEye = false;
         SpiderCheese = false;
         StarwBerry = false;
@@ -201,6 +213,7 @@ public class RecipeManager : MonoBehaviour
         CB = false;
         SBD = false;
         SM = false;
+        GameManager.instance.curEffect= 0; // 현재 정답 초기화
 
         RawDough.SetActive(true);
 
@@ -208,7 +221,7 @@ public class RecipeManager : MonoBehaviour
         Frog.SetActive(false);
         Berry.SetActive(false);
         Dough.SetActive(false);
-        Doughnut.SetActive(false);
+        FrogPie.SetActive(false);
         PizzaBread.SetActive(false);
         FruitCake.SetActive(false);
         CheeseBread.SetActive(false);
@@ -230,14 +243,14 @@ public class RecipeManager : MonoBehaviour
      */
     public void Bake()
     {
-        if (SpiderCheese == true && FrogEye == true && StarwBerry == false)
+        if (dough == true && SpiderCheese == true && FrogEye == true && StarwBerry == false)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
             Frog.SetActive(false);
             Dough.SetActive(false);
 
-            Doughnut.SetActive(true);
+            FrogPie.SetActive(true);
 
             BDoughnut = true;
             FrogEye = false;
@@ -249,11 +262,11 @@ public class RecipeManager : MonoBehaviour
             SBD = false;
             SM = false;
 
-            Debug.Log("안정의 도넛이 구워졌습니다.");
+            Debug.Log("도넛이 구워졌습니다.");
             GameManager.instance.currentAnswer = 1;
             UIMananger.instance.ActiveAnswerBasket();
         }
-        else if (SpiderCheese == true && FrogEye == false && StarwBerry == false)
+        else if (dough == true && SpiderCheese == true && FrogEye == false && StarwBerry == false)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
@@ -272,11 +285,11 @@ public class RecipeManager : MonoBehaviour
             SBD = false;
             SM = false;
 
-            Debug.Log("희망을 주는 치즈식빵이 구워졌습니다.");
+            Debug.Log("치즈식빵이 구워졌습니다.");
             GameManager.instance.currentAnswer = 4;
             UIMananger.instance.ActiveAnswerBasket();
         }
-        else if (SpiderCheese == true && FrogEye == false && StarwBerry == true)
+        else if (dough == true && SpiderCheese == true && FrogEye == false && StarwBerry == true)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
@@ -295,11 +308,11 @@ public class RecipeManager : MonoBehaviour
             SBD = false;
             SM = false;
 
-            Debug.Log("용기를 복돋아주는 피자빵이 구워졌습니다.");
+            Debug.Log("피자빵이 구워졌습니다.");
             GameManager.instance.currentAnswer = 2;
             UIMananger.instance.ActiveAnswerBasket();
         }
-        else if (SpiderCheese == false && FrogEye == false && StarwBerry == true)
+        else if (dough == true && SpiderCheese == false && FrogEye == false && StarwBerry == true)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
@@ -318,11 +331,11 @@ public class RecipeManager : MonoBehaviour
             CB = false;
             SM = false;
 
-            Debug.Log("자존감의 딸기 도넛이 구워졌습니다.");
+            Debug.Log("딸기 도넛이 구워졌습니다.");
             GameManager.instance.currentAnswer = 5;
             UIMananger.instance.ActiveAnswerBasket();
         }
-        else if (SpiderCheese == false && FrogEye == true && StarwBerry == true)
+        else if (dough == true && SpiderCheese == false && FrogEye == true && StarwBerry == true)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
@@ -341,11 +354,11 @@ public class RecipeManager : MonoBehaviour
             SBD = false;
             SM = false;
 
-            Debug.Log("자신감을 주는 과일케이크가 구워졌습니다.");
+            Debug.Log("과일케이크가 구워졌습니다.");
             GameManager.instance.currentAnswer = 3;
             UIMananger.instance.ActiveAnswerBasket();
         }
-        else if (SpiderCheese == false && FrogEye == true && StarwBerry == false)
+        else if (dough == true && SpiderCheese == false && FrogEye == true && StarwBerry == false)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
@@ -364,11 +377,15 @@ public class RecipeManager : MonoBehaviour
             CB = false;
             SBD = false;
 
-            Debug.Log("진정의 깍구리머핀이 구워졌습니다.");
+            Debug.Log("깍구리머핀이 구워졌습니다.");
             GameManager.instance.currentAnswer = 6;
             UIMananger.instance.ActiveAnswerBasket();
         }
-
+        else if (dough == false)
+        {
+            Debug.Log("반죽을 먼저 만들어주세요.");
+        }
+      
     }
 
 }

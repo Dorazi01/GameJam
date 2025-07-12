@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -7,25 +8,37 @@ using UnityEngine.UI;
 
 public class UIMananger : MonoBehaviour
 {
+    public Image timerImage;
+
+    
     public RectTransform domaBackGround;
     public static UIMananger instance;
     public GameObject TimeOverWindow;
 
     // UIMananger 클래스 내부에 추가
     public TextMeshProUGUI dialogText; // Inspector에서 할당
+    string dialogText2;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameTImeText; // 게임 시간 표시용 텍스트   
+
     public GameObject dialogBox;
     public GameObject answerBasket;
 
     public Scrollbar OrderTimeScrollbar;
 
     public GameObject NpcPrefab;
-    
+
+    public int NpcsprNum; // NPC 스프라이트 번호
+
 
     public int realAnswer; // 실제 정답
+    public int realMood; // 실제 기분
+    
     string winText;
     string loseText;
+    string wrongFoodText; // 잘못된 음식 텍스트
+    string wrongMoodText; // 잘못된 기분 텍스트
+
 
 
     private Dialog dialog;
@@ -65,22 +78,36 @@ public class UIMananger : MonoBehaviour
     public void PushAnswer()
     {
         Debug.Log($"winText: {winText}, loseText: {loseText}");
-        if (GameManager.instance.currentAnswer == realAnswer)
+        if (GameManager.instance.currentAnswer == realAnswer&& GameManager.instance.curEffect == realMood)
         {
+            NPCBehaviour.instance.spriteRenderer.sprite = NPCBehaviour.instance.correctSprites[UIMananger.instance.NpcsprNum];
             GameManager.instance.IncreaseScore(); // 점수 증가
 
             Debug.Log("정답입니다! 점수가 증가했습니다.");
             dialogText.text = winText; // 승리 메시지 출력
 
 
-
+        }
+        else if (GameManager.instance.currentAnswer == realAnswer && GameManager.instance.curEffect != realMood)
+        {
+            NPCBehaviour.instance.spriteRenderer.sprite = NPCBehaviour.instance.correctSprites[UIMananger.instance.NpcsprNum];
+            GameManager.instance.IncreaseScore(); // 점수 증가
+            dialogText.text = wrongMoodText; // 승리 메시지 출력
+        }
+        else if (GameManager.instance.currentAnswer != realAnswer && GameManager.instance.curEffect == realMood)
+        {
+            NPCBehaviour.instance.spriteRenderer.sprite = NPCBehaviour.instance.correctSprites[UIMananger.instance.NpcsprNum];
+            GameManager.instance.IncreaseScore(); // 점수 증가
+            dialogText.text = wrongFoodText; // 승리 메시지 출력
         }
         else
         {
+            NPCBehaviour.instance.spriteRenderer.sprite = NPCBehaviour.instance.wrongSprites[UIMananger.instance.NpcsprNum];
             Debug.Log("붕슨.");
             dialogText.text = loseText; // 승리 메시지 출력
         }
         Invoke(nameof(CleanUp), 3f);
+        
     }
 
     public void CleanUp()
@@ -107,15 +134,34 @@ public class UIMananger : MonoBehaviour
     {
         DialogEntry entry = dialog.GetRandomDialog(level);
 
-        realAnswer = entry.Value; 
+        realAnswer = entry.Food; // 실제 정답을 음식으로 설정
+        realMood = entry.Mood; 
 
         if (entry != null && dialogText != null)
-            dialogText.text = entry.Text; // 대사만 출력
+            dialogText.text = entry.Text1; // 대사만 출력
+            dialogText2 = entry.Text2; // 대사2도 저장 (추가로 사용될 수 있음)
 
-        lastOrderText = entry.Text; // 주문 문장만 저장
+
+        lastOrderText = entry.Text1; // 주문 문장만 저장
+
+
+        NpcsprNum = entry.CharNum; // NPC 스프라이트 번호 저장
         winText = entry.WinText; // 승리 메시지 저장
         loseText = entry.LoseText; // 패배 메시지 저장
+        wrongFoodText = entry.WrongFood; // 잘못된 음식 텍스트 저장
+        wrongMoodText = entry.WrongMood; // 잘못된 기분 텍스트 저장
 
+    }
+
+
+    public void QueButtonIn()
+    {
+        dialogText.text = dialogText2;
+    }
+
+    public void QueButtonOut()
+    {
+        dialogText.text = lastOrderText ;
     }
 
 
@@ -188,8 +234,12 @@ public class UIMananger : MonoBehaviour
 
         if (GameManager.instance != null && NpcPrefab != null)
         {
-            OrderTimeScrollbar.size = NpcPrefab.GetComponent<NPCBehaviour>().curTime / 40f; // NPC의 생존 시간에 따라 스크롤바 값 업데이트
+
+            //OrderTimeScrollbar.size = NpcPrefab.GetComponent<NPCBehaviour>().curTime / 40f; // NPC의 생존 시간에 따라 스크롤바 값 업데이트
+            timerImage.fillAmount = NPCBehaviour.instance.curTime / NPCBehaviour.instance.lifeTime; // NPC의 생존 시간에 따라 타이머 이미지 업데이트
         }
+
+
 
 
 
@@ -266,6 +316,34 @@ public class UIMananger : MonoBehaviour
         }
         domaBackGround.anchoredPosition = endPos;
     }
+
+
+
+    public void onclickMood1()
+    {
+        GameManager.instance.curEffect = 1; // 1 = 공포
+    }
+    public void onclickMood2()
+    {
+        GameManager.instance.curEffect = 2; // 2 = 좌절
+    }
+    public void onclickMood3()
+    {
+        GameManager.instance.curEffect = 3; // 3 = 무기력
+    }
+    public void onclickMood4()
+    {
+        GameManager.instance.curEffect = 4; // 4 = 열등감
+    }
+    public void onclickMood5()
+    {
+        GameManager.instance.curEffect = 5; // 5 = 불안
+    }
+    public void onclickMood6()
+    {
+        GameManager.instance.curEffect = 6; // 6 = 분노
+    }
+
 
 
 

@@ -5,28 +5,60 @@ using UnityEngine.U2D;
 
 public class NPCBehaviour : MonoBehaviour
 {
-    public static NPCBehaviour instance; // 싱글톤 인스턴스
-    public Sprite sptriter;
+    public SpriteRenderer spriteRenderer; // 스프라이트 렌더러 컴포넌트
 
-    float lifeTime = 40f; // NPC의 생존 시간 (초 단위)
+    public static NPCBehaviour instance; // 싱글톤 인스턴스
+
+    public Sprite currentSprite;
+
+    public List<Sprite> normalsprites; // NPC가 가질 수 있는 스프라이트 목록
+
+    public List<Sprite> wrongSprites; // 정답일 때 사용할 스프라이트 목록
+
+    public List<Sprite> correctSprites; // 오답일 때 사용할 스프라이트 목록
+
+
+
+    public float lifeTime = 40f; // NPC의 생존 시간 (초 단위)
     public float curTime = 0f; // 현재 시간
 
     private void Awake()
     {
-        
         instance = this;
-        Invoke("DestroyNPC", 40f);
+        Invoke("DestroyNPC", lifeTime);
         UIMananger.instance.ActiveDialogText(); // 대화창 활성화
 
 
         UIMananger.instance.ShowRandomDialog(GameManager.instance.npcLevel);
+
+        
+
+
     }
 
     void Start()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        //spriteRenderer.sprite = sprite;
-        spriteRenderer.sortingOrder = 1;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            Debug.LogError("SpriteRenderer 컴포넌트가 없습니다.");
+            return;
+        }
+    }
+    private void Update()
+    {
+        if (curTime < lifeTime)
+        {
+            curTime += Time.deltaTime; // 현재 시간 업데이트
+
+
+            ReSprite();
+
+        }
+
+
+        
+
     }
 
     public void DestroyNPC()
@@ -38,24 +70,14 @@ public class NPCBehaviour : MonoBehaviour
         UIMananger.instance.UnActiveDialogText(); // 대화창 비활성화
     }
 
-
-    private void Update()
+    int curSprNum = 0;
+    private void ReSprite()
     {
-        if (curTime < lifeTime)
+        if (spriteRenderer && curSprNum != UIMananger.instance.NpcsprNum)
         {
-            curTime += Time.deltaTime; // 현재 시간 업데이트
-            
+            curSprNum = UIMananger.instance.NpcsprNum; // 현재 스프라이트 번호 가져오기
+            //Debug.Log("스프라이트 렌더러가 존재합니다.");
+            spriteRenderer.sprite = normalsprites[UIMananger.instance.NpcsprNum];
         }
-
-
-        if (GameManager.instance.isCorrectAnswer)
-        {
-           //애니메이션 넣을 자리
-        }
-
     }
-
-
-
-
 }

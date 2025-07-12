@@ -15,6 +15,8 @@ public class ChangeImage : MonoBehaviour
         {
             targetImage.sprite = changedSprite;
             isOriginal = false;
+
+            Invoke("ResetImage", 2f); 
         }
 
     }

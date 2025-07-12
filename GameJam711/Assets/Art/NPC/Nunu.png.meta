@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: cd136192c19d7554288cc8c6f22ba6a0
+guid: 458863904e5b24e44862995b3158653c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4178046375966092550
-    second: 4_0
+      213: 8970411068328946910
+    second: Nunu_0
+  - first:
+      213: -7777700083914060605
+    second: Nunu_1
+  - first:
+      213: -5175625916210156355
+    second: Nunu_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 4_0
+      name: Nunu_0
       rect:
         serializedVersion: 2
-        x: 174
-        y: 65
-        width: 391
-        height: 690
+        x: 29
+        y: 62
+        width: 434
+        height: 504
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af2de6115f89406c0800000000000000
-      internalID: -4178046375966092550
+      spriteID: edcaaf0e65d4d7c70800000000000000
+      internalID: 8970411068328946910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nunu_1
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 62
+        width: 434
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ccc6c05bfe001490800000000000000
+      internalID: -7777700083914060605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nunu_2
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 62
+        width: 434
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbcecfd96ab7c28b0800000000000000
+      internalID: -5175625916210156355
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      4_0: -4178046375966092550
+      Nunu_0: 8970411068328946910
+      Nunu_1: -7777700083914060605
+      Nunu_2: -5175625916210156355
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

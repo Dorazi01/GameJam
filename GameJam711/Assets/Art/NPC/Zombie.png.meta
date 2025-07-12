@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 7e23df69e86f5554b98715cedbfa66ab
+guid: d3c5c4b99fc4bef478be64727c04d5e8
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6470460504253458178
-    second: 3_0
+      213: 6019453725058403666
+    second: Zombie_0
+  - first:
+      213: -2485871483528494817
+    second: Zombie_1
+  - first:
+      213: 6284166523789267160
+    second: Zombie_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 3_0
+      name: Zombie_0
       rect:
         serializedVersion: 2
-        x: 172
-        y: 68
-        width: 396
-        height: 650
+        x: 120
+        y: 73
+        width: 328
+        height: 530
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ef817ce047e4436a0800000000000000
-      internalID: -6470460504253458178
+      spriteID: 25d02004545698350800000000000000
+      internalID: 6019453725058403666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_1
+      rect:
+        serializedVersion: 2
+        x: 705
+        y: 73
+        width: 327
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f11c2037e09608dd0800000000000000
+      internalID: -2485871483528494817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Zombie_2
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 73
+        width: 328
+        height: 530
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d05cdf8828d53750800000000000000
+      internalID: 6284166523789267160
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      3_0: -6470460504253458178
+      Zombie_0: 6019453725058403666
+      Zombie_1: -2485871483528494817
+      Zombie_2: 6284166523789267160
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

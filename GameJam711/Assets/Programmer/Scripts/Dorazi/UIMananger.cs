@@ -9,12 +9,19 @@ public class UIMananger : MonoBehaviour
 {
     public RectTransform domaBackGround;
     public static UIMananger instance;
+    public GameObject TimeOverWindow;
 
     // UIMananger 클래스 내부에 추가
     public TextMeshProUGUI dialogText; // Inspector에서 할당
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI gameTImeText; // 게임 시간 표시용 텍스트   
     public GameObject dialogBox;
     public GameObject answerBasket;
+
+    public Scrollbar OrderTimeScrollbar;
+
+    public GameObject NpcPrefab;
+    
 
     public int realAnswer; // 실제 정답
     string winText;
@@ -30,6 +37,11 @@ public class UIMananger : MonoBehaviour
     public TextMeshProUGUI recipeText; // RecipeBox 안에 있는 텍스트
 
     public bool RawDoughCreate = false; // 반죽 상태를 나타내는 변수
+
+
+
+
+
 
     public void ActiveDialogText()
     {
@@ -158,13 +170,27 @@ public class UIMananger : MonoBehaviour
 
     private void Update()
     {
-        
 
-         if (GameManager.instance != null && scoreText != null)
+
+        if (GameManager.instance != null && scoreText != null)
         {
             scoreText.text = "Score: " + GameManager.instance.score.ToString();
         }
-        
+
+        if (GameManager.instance != null && gameTImeText != null)
+        {
+            float remainTime = GameManager.instance.MaxTime - GameManager.instance.CurTIme;
+            int minutes = Mathf.FloorToInt(remainTime / 60f);
+            int seconds = Mathf.FloorToInt(remainTime % 60f);
+            gameTImeText.GetComponent<TMPro.TextMeshProUGUI>().text =
+                $"{minutes:00}:{seconds:00}";
+        }
+
+        if (GameManager.instance != null && NpcPrefab != null)
+        {
+            OrderTimeScrollbar.size = NpcPrefab.GetComponent<NPCBehaviour>().curTime / 40f; // NPC의 생존 시간에 따라 스크롤바 값 업데이트
+        }
+
 
 
     }

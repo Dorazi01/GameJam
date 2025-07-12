@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: b07715cf418cf8e409437f47f8e266db
+guid: ac3e11766d91a6e4f9dde1eec6a30847
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -855298285791758126
-    second: 1_0
+      213: -3717686652356265191
+    second: Elf_0
+  - first:
+      213: -7932737443883334456
+    second: Elf_1
+  - first:
+      213: 2520095694174478484
+    second: Elf_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 1_0
+      name: Elf_0
       rect:
         serializedVersion: 2
-        x: 208
-        y: 64
-        width: 315
-        height: 460
+        x: 113
+        y: 109
+        width: 306
+        height: 504
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d8b16a9dbe5124f0800000000000000
-      internalID: -855298285791758126
+      spriteID: 91bf714dfaf186cc0800000000000000
+      internalID: -3717686652356265191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_1
+      rect:
+        serializedVersion: 2
+        x: 611
+        y: 109
+        width: 462
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c4c4e0035149e190800000000000000
+      internalID: -7932737443883334456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Elf_2
+      rect:
+        serializedVersion: 2
+        x: 1271
+        y: 109
+        width: 306
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 490e24b8ead29f220800000000000000
+      internalID: 2520095694174478484
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      1_0: -855298285791758126
+      Elf_0: -3717686652356265191
+      Elf_1: -7932737443883334456
+      Elf_2: 2520095694174478484
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

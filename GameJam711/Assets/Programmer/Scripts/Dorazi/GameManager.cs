@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     {
         score = 0;
         isGameOver = false;
-        MaxTime = 120f;
+        MaxTime = 3f;
         CurTIme = 0f;
     }
 
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         isGameOver = true;
+        UIMananger.instance.TimeOverWindow.SetActive(true);
     }
 
     void SetNpcLevelByScene()

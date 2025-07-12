@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: 5c8959a32ff4bdb4b88739107ab395c4
+guid: 88a4b624f25ac0c4197e5b3d70877f8f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6937817954938267909
-    second: 2_0
+      213: -3994744024693093290
+    second: Dog_0
+  - first:
+      213: 3704152636332655822
+    second: Dog_1
+  - first:
+      213: 2313711220228016618
+    second: Dog_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +106,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: 2_0
+      name: Dog_0
       rect:
         serializedVersion: 2
-        x: 172
-        y: 64
-        width: 374
-        height: 619
+        x: 138
+        y: 167
+        width: 258
+        height: 376
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +121,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5092c600ca4184060800000000000000
-      internalID: 6937817954938267909
+      spriteID: 65ccd8f7971df88c0800000000000000
+      internalID: -3994744024693093290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dog_1
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 167
+        width: 258
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec44f62823bc76330800000000000000
+      internalID: 3704152636332655822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Dog_2
+      rect:
+        serializedVersion: 2
+        x: 1287
+        y: 167
+        width: 257
+        height: 376
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae9c682a814fb1020800000000000000
+      internalID: 2313711220228016618
       vertices: []
       indices: 
       edges: []
@@ -135,7 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      2_0: 6937817954938267909
+      Dog_0: -3994744024693093290
+      Dog_1: 3704152636332655822
+      Dog_2: 2313711220228016618
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

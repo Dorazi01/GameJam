@@ -23,8 +23,16 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         
-        
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         SetNpcLevelByScene();
 
         Init();
@@ -53,11 +61,26 @@ public class GameManager : MonoBehaviour
         isGameOver = false;
         MaxTime = 100f;
         CurTIme = 0f;
+        Time.timeScale = 1f;
     }
 
     public void IncreaseScore()
     {
-        score += 100;
+       
+
+        if (NPCBehaviour.instance.curTime < 10f)
+        {
+            score += 150;
+        }
+        else if (NPCBehaviour.instance.curTime < 20f)
+        {
+            score += 130;
+        }
+        else
+        {
+            score += 100;
+        }
+
 
     }
 

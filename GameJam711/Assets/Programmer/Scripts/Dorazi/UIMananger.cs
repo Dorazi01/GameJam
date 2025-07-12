@@ -130,6 +130,12 @@ public class UIMananger : MonoBehaviour
 
         dialog = new Dialog(); // Dialog 인스턴스 생성
     }
+
+    //void Start()
+    //{
+    //    domaBackGround = GameObject.Find("DomaBackGround").GetComponent<RectTransform>();
+    //}
+
     public void ShowRandomDialog(int level)
     {
         DialogEntry entry = dialog.GetRandomDialog(level);

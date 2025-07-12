@@ -16,6 +16,7 @@ public class SenceManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
     }
 
 

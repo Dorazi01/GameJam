@@ -54,6 +54,7 @@ public class RecipeManager : MonoBehaviour
     public GameObject SpiderMuffin;
 
     public GameObject RawDough; // 반죽 상태를 나타내는 변수
+  
 
     public void Awake()
     {
@@ -140,16 +141,14 @@ public class RecipeManager : MonoBehaviour
     public void Synthesis()
     {
         dough = true;
-        RawDough.SetActive(false);
         UIMananger.instance.RawDoughCreate = false;
         if (SpiderCheese == true && FrogEye == true && StarwBerry == false)
         {
             Spider.SetActive(false);
             Berry.SetActive(false);
             Frog.SetActive(false);
+            RawDough.SetActive(false);
             Dough.SetActive(true);
-
-
 
             Debug.Log("도넛반죽을 만들었습니다.");
         }
@@ -158,8 +157,8 @@ public class RecipeManager : MonoBehaviour
             Spider.SetActive(false);
             Berry.SetActive(false);
             Frog.SetActive(false);
+            RawDough.SetActive(false);
             Dough.SetActive(true);
-
 
             Debug.Log("과일케이크 반죽을 만들었습니다.");
         }
@@ -168,6 +167,7 @@ public class RecipeManager : MonoBehaviour
             Spider.SetActive(false);
             Berry.SetActive(false);
             Frog.SetActive(false);
+            RawDough.SetActive(false);
             Dough.SetActive(true);
 
 
@@ -178,6 +178,7 @@ public class RecipeManager : MonoBehaviour
             Spider.SetActive(false);
             Frog.SetActive(false);
             Berry.SetActive(false);
+            RawDough.SetActive(false);
             Dough.SetActive(true);
             Debug.Log("치즈식빵반죽을 만들었습니다.");
         }
@@ -186,6 +187,7 @@ public class RecipeManager : MonoBehaviour
             Spider.SetActive(false);
             Frog.SetActive(false);
             Berry.SetActive(false);
+            RawDough.SetActive(false);
             Dough.SetActive(true);
             Debug.Log("개구리머핀반죽을 만들었습니다.");
         }
@@ -194,8 +196,22 @@ public class RecipeManager : MonoBehaviour
             Spider.SetActive(false);
             Frog.SetActive(false);
             Berry.SetActive(false);
+            RawDough.SetActive(false);
             Dough.SetActive(true);
             Debug.Log("딸기 도넛반죽을 만들었습니다.");
+        }
+        else if (SpiderCheese == true && FrogEye == true && StarwBerry == true)
+        {
+            Spider.SetActive(false);
+            Frog.SetActive(false);
+            Berry.SetActive(false);
+            RawDough.SetActive(true);
+            Dough.SetActive(false);
+            Debug.Log("존재하지 않는 제조법입니다 제발 제조'법규'를 준수해주십시오.");
+        }
+        else if (dough == true && SpiderCheese == false && FrogEye == false && StarwBerry == false)
+        {
+            Debug.Log("재료를 넣고 반죽해주십시오.");
         }
 
 
@@ -216,7 +232,6 @@ public class RecipeManager : MonoBehaviour
         GameManager.instance.curEffect= 0; // 현재 정답 초기화
 
         RawDough.SetActive(true);
-
         Spider.SetActive(false);
         Frog.SetActive(false);
         Berry.SetActive(false);

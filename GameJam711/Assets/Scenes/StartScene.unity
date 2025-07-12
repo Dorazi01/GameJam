@@ -423,10 +423,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a5fb2a9d9f11314096d1373b873b531, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timerImage: {fileID: 0}
   domaBackGround: {fileID: 0}
+  TimeOverWindow: {fileID: 0}
   dialogText: {fileID: 0}
   scoreText: {fileID: 0}
+  gameTImeText: {fileID: 0}
   dialogBox: {fileID: 0}
+  answerBasket: {fileID: 0}
+  OrderTimeScrollbar: {fileID: 0}
+  NpcPrefab: {fileID: 0}
+  NpcsprNum: 0
+  realAnswer: 0
+  realMood: 0
+  orderReviewBox: {fileID: 0}
+  recipeBox: {fileID: 0}
+  recipeText: {fileID: 0}
+  RawDoughCreate: 0
 --- !u!4 &227085137
 Transform:
   m_ObjectHideFlags: 0
@@ -437,6 +450,59 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.36396, y: -0.49409, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &245743418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 245743420}
+  - component: {fileID: 245743419}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &245743419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245743418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957cd46dd11a6a64b974953ec9b5c707, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcLevel: 0
+  score: 0
+  currentAnswer: 0
+  isCorrectAnswer: 0
+  currentMood: 0
+  curEffect: 0
+  MaxTime: 0
+  CurTIme: 0
+  isGameOver: 0
+--- !u!4 &245743420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 245743418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1514, y: 9.39158, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1382,3 +1448,4 @@ SceneRoots:
   - {fileID: 1120590436}
   - {fileID: 227085137}
   - {fileID: 1554118365}
+  - {fileID: 245743420}

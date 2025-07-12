@@ -2344,7 +2344,7 @@ GameObject:
   - component: {fileID: 350995075}
   - component: {fileID: 350995074}
   m_Layer: 5
-  m_Name: "\uC8FC!!!!!!!!!!\uAE30!!!!!!!!!!!"
+  m_Name: JuGi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4490,7 +4490,7 @@ GameObject:
   - component: {fileID: 717252906}
   - component: {fileID: 717252905}
   m_Layer: 5
-  m_Name: "\uBC14\uAD70\uD76C \uC784 \uC758 \uC951"
+  m_Name: BarGuNi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4567,7 +4567,7 @@ GameObject:
   - component: {fileID: 750507267}
   - component: {fileID: 750507266}
   m_Layer: 5
-  m_Name: "\uBB3C\uC57D\uBCF4\uAE30"
+  m_Name: Bottle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6967,7 +6967,7 @@ GameObject:
   - component: {fileID: 1120989928}
   - component: {fileID: 1120989927}
   m_Layer: 5
-  m_Name: "\uC2DC\uAC04UI\uC0AC\uAC01\uD615"
+  m_Name: TimerUi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8589,7 +8589,7 @@ GameObject:
   - component: {fileID: 1539002429}
   - component: {fileID: 1539002428}
   m_Layer: 5
-  m_Name: "\uAFB8\uC774\uAFB8\uC774"
+  m_Name: Bake
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11166,7 +11166,7 @@ GameObject:
   - component: {fileID: 1845564466}
   - component: {fileID: 1845564469}
   m_Layer: 5
-  m_Name: "\uC4F0\uB808\uAE30\uD1B5"
+  m_Name: Trash
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -53,8 +53,63 @@ public class UIMananger : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+           // DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        dialog = new Dialog(); // Dialog 인스턴스 생성
+    }
+ /*
+    void Start()
+    {
+        domaBackGround = GameObject.Find("DomaBackGround").GetComponent<RectTransform>();
+        TimeOverWindow = GameObject.Find("TimeOverWindow").GetComponent<GameObject>();
+        dialogText = GameObject.Find("dialogText").GetComponent<TextMeshProUGUI>();
+        scoreText = GameObject.Find("scoreText").GetComponent<TextMeshProUGUI>();
+        gameTImeText = GameObject.Find("gameTImeText").GetComponent<TextMeshProUGUI>();
+        dialogBox = GameObject.Find("dialogBox").GetComponent<GameObject>();
+        answerBasket = GameObject.Find("answerBasket").GetComponent<GameObject>();
+        OrderTimeScrollbar = GameObject.Find("OrderTimeScrollbar").GetComponent<Scrollbar>();
+        NpcPrefab = GameObject.Find("NpcPrefab").GetComponent<GameObject>();
+        NpcsprNum = GameObject.Find("NpcsprNum").GetComponent<int>();
+        realAnswer = GameObject.Find("realAnswer").GetComponent<int>();
+        realMood = GameObject.Find("realMood").GetComponent<int>();
+
+       
 
 
+
+
+    private string lastOrderText; //주문 저장
+    public GameObject orderReviewBox;  // 주문 다시보기용 UI 오브젝트
+
+    public GameObject recipeBox; // 새로 만든 레시피 박스 오브젝트
+    public TextMeshProUGUI recipeText; // RecipeBox 안에 있는 텍스트
+
+    public bool RawDoughCreate = false; // 반죽 상태를 나타내는 변수
+
+
+            string dialogText2;
+
+    private Dialog dialog;
+    
+    string winText;
+    string loseText;
+    string wrongFoodText; // 잘못된 음식 텍스트
+    string wrongMoodText; // 잘못된 기분 텍스트
+
+
+         
+    }
+*/
 
     public void ActiveDialogText()
     {
@@ -116,25 +171,7 @@ public class UIMananger : MonoBehaviour
         NPCBehaviour.instance.DestroyNPC();
     }
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        dialog = new Dialog(); // Dialog 인스턴스 생성
-    }
-
-    //void Start()
-    //{
-    //    domaBackGround = GameObject.Find("DomaBackGround").GetComponent<RectTransform>();
-    //}
+  
 
     public void ShowRandomDialog(int level)
     {

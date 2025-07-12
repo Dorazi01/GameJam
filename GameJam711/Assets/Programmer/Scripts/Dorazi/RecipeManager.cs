@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
 {
+    public static RecipeManager instance; // 싱글톤 인스턴스
     //도마 매니저 (재료통 버튼 클릭시) / (재료 불 변수 On)  / 열등, 무기력, 좌절, 공포, 분노, 불안
     /*
         자신감을 주는 과일케이크 (공포)
@@ -41,6 +42,20 @@ public class RecipeManager : MonoBehaviour
     public GameObject SBDoughnut;
     public GameObject SpiderMuffin;
 
+    public GameObject RawDough; // 반죽 상태를 나타내는 변수
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void SC()
     {
@@ -113,6 +128,8 @@ public class RecipeManager : MonoBehaviour
     
     public void Synthesis()
     {
+        RawDough.SetActive(false);
+        UIMananger.instance.RawDoughCreate = false;
         if (SpiderCheese == true && FrogEye == true && StarwBerry == false)
         {
             Spider.SetActive(false);
@@ -185,6 +202,7 @@ public class RecipeManager : MonoBehaviour
         SBD = false;
         SM = false;
 
+        RawDough.SetActive(true);
 
         Spider.SetActive(false);
         Frog.SetActive(false);

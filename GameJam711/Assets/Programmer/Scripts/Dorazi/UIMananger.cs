@@ -23,6 +23,13 @@ public class UIMananger : MonoBehaviour
 
     private Dialog dialog;
 
+    private string lastOrderText; //주문 저장
+    public GameObject orderReviewBox;  // 주문 다시보기용 UI 오브젝트
+
+    public GameObject recipeBox; // 새로 만든 레시피 박스 오브젝트
+    public TextMeshProUGUI recipeText; // RecipeBox 안에 있는 텍스트
+
+    public bool RawDoughCreate = false; // 반죽 상태를 나타내는 변수
 
     public void ActiveDialogText()
     {
@@ -61,7 +68,15 @@ public class UIMananger : MonoBehaviour
             Debug.Log("붕슨.");
             dialogText.text = loseText; // 승리 메시지 출력
         }
+        Invoke(nameof(CleanUp), 3f);
     }
+
+    public void CleanUp()
+    {
+        RecipeManager.instance.Reset();
+        NPCBehaviour.instance.DestroyNPC();
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -85,14 +100,61 @@ public class UIMananger : MonoBehaviour
         if (entry != null && dialogText != null)
             dialogText.text = entry.Text; // 대사만 출력
 
+        lastOrderText = entry.Text; // 주문 문장만 저장
         winText = entry.WinText; // 승리 메시지 저장
         loseText = entry.LoseText; // 패배 메시지 저장
 
     }
 
-    
+
+    public void ShowLastOrder()
+    {
+        if (orderReviewBox != null)
+        {
+            if (orderReviewBox.activeSelf)
+            {
+                orderReviewBox.SetActive(false); // 켜져 있으면 끄기
+            }
+            else
+            {
+                orderReviewBox.SetActive(true); // 꺼져 있으면 켜기
+
+                // 주문 텍스트 갱신
+                TextMeshProUGUI orderText = orderReviewBox.GetComponentInChildren<TextMeshProUGUI>();
+                if (orderText != null)
+                {
+                    orderText.text = lastOrderText;
+                }
+                else
+                {
+                    Debug.LogWarning("orderReviewBox 내에 TextMeshProUGUI 컴포넌트가 없습니다.");
+                }
+            }
+        }
+    }
 
 
+    public void ShowRecipe()
+    {
+        if (recipeBox != null)
+        {
+            if (recipeBox.activeSelf)
+            {
+                recipeBox.SetActive(false);
+            }
+            else
+            {
+                recipeBox.SetActive(true);
+                recipeText.text =
+                    "거미치즈 + 산딸기 = 피자빵\n" +
+                    "거미치즈 + 개구리알 = 도넛\n" +
+                    "개구리알 + 산딸기 = 과일케이크\n" +
+                    "거미치즈 = 치즈식빵\n" +
+                    "산딸기 = 딸기 도넛\n" +
+                    "개구리알 = 개구리알 머핀";
+            }
+        }
+    }
 
     private void Update()
     {
@@ -116,6 +178,13 @@ public class UIMananger : MonoBehaviour
         isUIMoving = true;
         StartCoroutine(SlideInDomaBackGround());
         isUIMoving = false;
+        // 도마 열리면서 반죽 생성 (이미 생성 안 됐으면)
+        if (!RawDoughCreate)
+        {
+            RecipeManager.instance.RawDough.SetActive(true);
+            RawDoughCreate = true;
+            Debug.Log("도마에 반죽이 생성되었습니다.");
+        }
 
     }
 

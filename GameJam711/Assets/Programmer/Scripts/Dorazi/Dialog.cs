@@ -9,6 +9,12 @@ public class Dialog
 
     private System.Random random = new System.Random();
 
+    // 최근 3개의 인덱스를 저장할 큐
+    private Queue<int> recentIndices = new Queue<int>();
+
+    // 최대 저장 개수
+    private const int maxRecent = 3;
+
     public Dialog()
     {
 
@@ -66,7 +72,7 @@ public class Dialog
 
     }
 
-    // 레벨별 랜덤 대사 반환
+    // 레벨별 랜덤 대사 반환 (최근 3개 주문과 중복 안 되게)
     public DialogEntry GetRandomDialog(int level)
     {
         List<DialogEntry> targetList = level switch
@@ -80,7 +86,33 @@ public class Dialog
         if (targetList.Count == 0)
             return null;
 
-        int idx = random.Next(targetList.Count);
-        return targetList[idx];
+        // 후보 인덱스 리스트 생성 (최근 3개 인덱스 제외)
+        List<int> candidateIndices = new List<int>();
+        for (int i = 0; i < targetList.Count; i++)
+        {
+            if (!recentIndices.Contains(i))
+                candidateIndices.Add(i);
+        }
+
+        // 만약 후보가 없다면(전체가 최근에 나왔으면) 모든 인덱스를 후보로 (중복 허용)
+        if (candidateIndices.Count == 0)
+        {
+            for (int i = 0; i < targetList.Count; i++)
+            {
+                candidateIndices.Add(i);
+            }
+        }
+
+        // 후보 중에서 랜덤 선택
+        int chosenIndex = candidateIndices[random.Next(candidateIndices.Count)];
+
+        // 최근 인덱스 큐에 추가
+        recentIndices.Enqueue(chosenIndex);
+        if (recentIndices.Count > maxRecent)
+        {
+            recentIndices.Dequeue();
+        }
+
+        return targetList[chosenIndex];
     }
 }

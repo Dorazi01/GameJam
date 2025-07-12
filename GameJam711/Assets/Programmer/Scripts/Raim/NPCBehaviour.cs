@@ -5,9 +5,11 @@ using UnityEngine.U2D;
 
 public class NPCBehaviour : MonoBehaviour
 {
+    public static NPCBehaviour instance; // 싱글톤 인스턴스
     public Sprite sptriter;
     private void Awake()
     {
+        instance = this;
         Invoke("DestroyNPC", 40f);
         UIMananger.instance.ActiveDialogText(); // 대화창 활성화
 
@@ -22,7 +24,7 @@ public class NPCBehaviour : MonoBehaviour
         spriteRenderer.sortingOrder = 1;
     }
 
-    void DestroyNPC()
+    public void DestroyNPC()
     {
         NPCspawnmanager.instance.isSpawned = false; // NPC가 제거되었음을 표시
         NPCspawnmanager.instance.spawnCooldown = 5f; // 쿨타임 초기화

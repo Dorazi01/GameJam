@@ -16,6 +16,12 @@ public class ChangeImage : MonoBehaviour
             targetImage.sprite = changedSprite;
             isOriginal = false;
 
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+
             Invoke("ResetImage", 2f); 
         }
 

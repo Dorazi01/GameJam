@@ -20,6 +20,7 @@ public class UIMananger : MonoBehaviour
     string dialogText2;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI gameTImeText; // 게임 시간 표시용 텍스트   
+    public TextMeshProUGUI highScoreText;
 
     public GameObject dialogBox;
     public GameObject answerBasket;
@@ -27,6 +28,8 @@ public class UIMananger : MonoBehaviour
     public Scrollbar OrderTimeScrollbar;
 
     public GameObject NpcPrefab;
+
+    public TextMeshProUGUI endScoreText;
 
     public int NpcsprNum; // NPC 스프라이트 번호
 
@@ -47,6 +50,7 @@ public class UIMananger : MonoBehaviour
     public GameObject orderReviewBox;  // 주문 다시보기용 UI 오브젝트
 
     public GameObject recipeBox; // 새로 만든 레시피 박스 오브젝트
+    public GameObject BottleRecipe; // 병 레시피 박스 오브젝트
     public TextMeshProUGUI recipeText; // RecipeBox 안에 있는 텍스트
 
     public bool RawDoughCreate = false; // 반죽 상태를 나타내는 변수
@@ -67,49 +71,9 @@ public class UIMananger : MonoBehaviour
 
         dialog = new Dialog(); // Dialog 인스턴스 생성
     }
- /*
-    void Start()
-    {
-        domaBackGround = GameObject.Find("DomaBackGround").GetComponent<RectTransform>();
-        TimeOverWindow = GameObject.Find("TimeOverWindow").GetComponent<GameObject>();
-        dialogText = GameObject.Find("dialogText").GetComponent<TextMeshProUGUI>();
-        scoreText = GameObject.Find("scoreText").GetComponent<TextMeshProUGUI>();
-        gameTImeText = GameObject.Find("gameTImeText").GetComponent<TextMeshProUGUI>();
-        dialogBox = GameObject.Find("dialogBox").GetComponent<GameObject>();
-        answerBasket = GameObject.Find("answerBasket").GetComponent<GameObject>();
-        OrderTimeScrollbar = GameObject.Find("OrderTimeScrollbar").GetComponent<Scrollbar>();
-        NpcPrefab = GameObject.Find("NpcPrefab").GetComponent<GameObject>();
-        NpcsprNum = GameObject.Find("NpcsprNum").GetComponent<int>();
-        realAnswer = GameObject.Find("realAnswer").GetComponent<int>();
-        realMood = GameObject.Find("realMood").GetComponent<int>();
-
-       
-
-
-
-
-    private string lastOrderText; //주문 저장
-    public GameObject orderReviewBox;  // 주문 다시보기용 UI 오브젝트
-
-    public GameObject recipeBox; // 새로 만든 레시피 박스 오브젝트
-    public TextMeshProUGUI recipeText; // RecipeBox 안에 있는 텍스트
-
-    public bool RawDoughCreate = false; // 반죽 상태를 나타내는 변수
-
-
-            string dialogText2;
-
-    private Dialog dialog;
     
-    string winText;
-    string loseText;
-    string wrongFoodText; // 잘못된 음식 텍스트
-    string wrongMoodText; // 잘못된 기분 텍스트
 
 
-         
-    }
-*/
 
     public void ActiveDialogText()
     {
@@ -233,6 +197,13 @@ public class UIMananger : MonoBehaviour
             }
         }
     }
+    public void ShowLastOrderOff()
+    {
+        if (orderReviewBox != null)
+        {
+            orderReviewBox.SetActive(false); // 주문 다시보기 UI 끄기
+        }
+    }
 
 
     public void ShowRecipe()
@@ -256,23 +227,71 @@ public class UIMananger : MonoBehaviour
             }
         }
     }
+    public void ShowRecipeOff()
+    {
+        if (recipeBox != null)
+        {
+            recipeBox.SetActive(false);
+        }
+    }
+
+    public void ShowBottleRecipe()
+    {
+        if (BottleRecipe != null)
+        {
+            if (BottleRecipe.activeSelf)
+            {
+                BottleRecipe.SetActive(false);
+            }
+            else
+            {
+                BottleRecipe.SetActive(true);
+              
+            }
+        }
+    }
+
+    public void ShowBottleRecipeOff()
+        {
+        if (BottleRecipe != null)
+        {
+            BottleRecipe.SetActive(false);
+        }
+    }
 
     private void Update()
     {
 
+        if (GameManager.instance.isHighScore)
+        {
+            
+            highScoreText.gameObject.SetActive(true);
+            highScoreText.text = "High Score: " + GameManager.instance.HighScore.ToString();
+        }
 
         if (GameManager.instance != null && scoreText != null)
         {
-            scoreText.text = "Score: " + GameManager.instance.score.ToString();
+            scoreText.text = GameManager.instance.score.ToString();
         }
 
         if (GameManager.instance != null && gameTImeText != null)
         {
+            //0초 이하로 내려가지 않도록 처리
+            
             float remainTime = GameManager.instance.MaxTime - GameManager.instance.CurTIme;
+            if (remainTime <= 0f)
+            {
+                remainTime = 0f;
+                return;
+                // 게임 시간이 0 이하로 내려가지 않도록 처리
+            }
             int minutes = Mathf.FloorToInt(remainTime / 60f);
             int seconds = Mathf.FloorToInt(remainTime % 60f);
             gameTImeText.GetComponent<TMPro.TextMeshProUGUI>().text =
                 $"{minutes:00}:{seconds:00}";
+
+            
+
         }
 
         if (GameManager.instance != null && NpcPrefab != null)
@@ -425,4 +444,11 @@ public class UIMananger : MonoBehaviour
         SceneManager.LoadScene("Level3");
         GameManager.instance.npcLevel = 3; // Set the NPC level for Level 3
     }
+    public void endScoreUp()
+    {
+        
+        endScoreText.text = "Score: " + GameManager.instance.score.ToString();
+
+    }
+
 }

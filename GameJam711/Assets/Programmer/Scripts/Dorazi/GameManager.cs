@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     public bool isCorrectAnswer = false;
     public int currentMood = 0;
 
+    public bool isHighScore = false;
+
     public int curEffect = 0;
     //0 = 없음, 1 = 공포, 2 = 좌절, 3 = 무기력, 4 = 열등, 5 = 불안, 6 = 분노
 
@@ -19,6 +21,10 @@ public class GameManager : MonoBehaviour
     public float CurTIme;
 
     public bool isGameOver= false;
+
+    public int HighScore;
+
+
 
     private void Awake()
     {
@@ -42,7 +48,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        CurTIme += Time.deltaTime;
+        //Level1, Level2, Level3 씬에서만 실행
+        if (SceneManager.GetActiveScene().name == "Level1" || SceneManager.GetActiveScene().name == "Level2" || SceneManager.GetActiveScene().name == "Level3")
+        {
+            CurTIme += Time.deltaTime;
+        }
+        
 
 
 
@@ -86,9 +97,32 @@ public class GameManager : MonoBehaviour
 
     void TimeOver()
     {
-        Time.timeScale = 0f;
+        UIMananger.instance.endScoreUp();
+        
         isGameOver = true;
         UIMananger.instance.TimeOverWindow.SetActive(true);
+        if (score > HighScore)
+        {
+            isHighScore = true;
+            HighScore = score;
+            //씬 이름이 1,2,3일때 HighScoreStage1, HighScoreStage2, HighScoreStage3로 저장
+            string sceneName = SceneManager.GetActiveScene().name;
+            if (sceneName == "Level1")
+            {
+                PlayerPrefs.SetInt("HighScoreStage1", HighScore);
+            }
+            else if (sceneName == "Level2")
+            {
+                PlayerPrefs.SetInt("HighScoreStage2", HighScore);
+            }
+            else if (sceneName == "Level3")
+            {
+                PlayerPrefs.SetInt("HighScoreStage3", HighScore);
+            }
+        }
+
+
+        Time.timeScale = 0f;
     }
 
     void SetNpcLevelByScene()

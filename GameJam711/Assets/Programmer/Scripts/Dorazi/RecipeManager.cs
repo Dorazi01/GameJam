@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RecipeManager : MonoBehaviour
@@ -52,20 +53,21 @@ public class RecipeManager : MonoBehaviour
     public GameObject CheeseBread;
     public GameObject SBDoughnut;
     public GameObject SpiderMuffin;
-
     public GameObject RawDough; // 반죽 상태를 나타내는 변수
-  
+    public GameObject BakeDough; // 오븐 트레이 위 반죽
+
+
 
     public void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
@@ -242,6 +244,7 @@ public class RecipeManager : MonoBehaviour
         CheeseBread.SetActive(false);
         SBDoughnut.SetActive(false);
         SpiderMuffin.SetActive(false);
+        BakeDough.SetActive(false); // 추가됨
         Debug.Log("도마의 정 상 화");
     }
 
@@ -258,149 +261,83 @@ public class RecipeManager : MonoBehaviour
      */
     public void Bake()
     {
-        if (dough == true && SpiderCheese == true && FrogEye == true && StarwBerry == false)
-        {
-            Spider.SetActive(false);
-            Berry.SetActive(false);
-            Frog.SetActive(false);
-            Dough.SetActive(false);
-
-            FrogPie.SetActive(true);
-
-            BDoughnut = true;
-            FrogEye = false;
-            SpiderCheese = false;
-            StarwBerry = false;
-            PB = false;
-            FC = false;
-            CB = false;
-            SBD = false;
-            SM = false;
-
-            Debug.Log("도넛이 구워졌습니다.");
-            GameManager.instance.currentAnswer = 1;
-            UIMananger.instance.ActiveAnswerBasket();
-        }
-        else if (dough == true && SpiderCheese == true && FrogEye == false && StarwBerry == false)
-        {
-            Spider.SetActive(false);
-            Berry.SetActive(false);
-            Frog.SetActive(false);
-            Dough.SetActive(false);
-
-            CheeseBread.SetActive(true);
-
-            CB = true;
-            FrogEye = false;
-            SpiderCheese = false;
-            StarwBerry = false;
-            BDoughnut = false;
-            PB = false;
-            FC = false;
-            SBD = false;
-            SM = false;
-
-            Debug.Log("치즈식빵이 구워졌습니다.");
-            GameManager.instance.currentAnswer = 4;
-            UIMananger.instance.ActiveAnswerBasket();
-        }
-        else if (dough == true && SpiderCheese == true && FrogEye == false && StarwBerry == true)
-        {
-            Spider.SetActive(false);
-            Berry.SetActive(false);
-            Frog.SetActive(false);
-            Dough.SetActive(false);
-
-            PizzaBread.SetActive(true);
-
-            PB = true;
-            FrogEye = false;
-            SpiderCheese = false;
-            StarwBerry = false;
-            BDoughnut = false;
-            FC = false;
-            CB = false;
-            SBD = false;
-            SM = false;
-
-            Debug.Log("피자빵이 구워졌습니다.");
-            GameManager.instance.currentAnswer = 2;
-            UIMananger.instance.ActiveAnswerBasket();
-        }
-        else if (dough == true && SpiderCheese == false && FrogEye == false && StarwBerry == true)
-        {
-            Spider.SetActive(false);
-            Berry.SetActive(false);
-            Frog.SetActive(false);
-            Dough.SetActive(false);
-
-            SBDoughnut.SetActive(true);
-
-            SBD = true;
-            FrogEye = false;
-            SpiderCheese = false;
-            StarwBerry = false;
-            BDoughnut = false;
-            PB = false;
-            FC = false;
-            CB = false;
-            SM = false;
-
-            Debug.Log("딸기 도넛이 구워졌습니다.");
-            GameManager.instance.currentAnswer = 5;
-            UIMananger.instance.ActiveAnswerBasket();
-        }
-        else if (dough == true && SpiderCheese == false && FrogEye == true && StarwBerry == true)
-        {
-            Spider.SetActive(false);
-            Berry.SetActive(false);
-            Frog.SetActive(false);
-            Dough.SetActive(false);
-
-            FruitCake.SetActive(true);
-
-            FC = true;
-            FrogEye = false;
-            SpiderCheese = false;
-            StarwBerry = false;
-            BDoughnut = false;
-            PB = false;
-            CB = false;
-            SBD = false;
-            SM = false;
-
-            Debug.Log("과일케이크가 구워졌습니다.");
-            GameManager.instance.currentAnswer = 3;
-            UIMananger.instance.ActiveAnswerBasket();
-        }
-        else if (dough == true && SpiderCheese == false && FrogEye == true && StarwBerry == false)
-        {
-            Spider.SetActive(false);
-            Berry.SetActive(false);
-            Frog.SetActive(false);
-            Dough.SetActive(false);
-
-            SpiderMuffin.SetActive(true);
-
-            SM = true;
-            FrogEye = false;
-            SpiderCheese = false;
-            StarwBerry = false;
-            BDoughnut = false;
-            PB = false;
-            FC = false;
-            CB = false;
-            SBD = false;
-
-            Debug.Log("깍구리머핀이 구워졌습니다.");
-            GameManager.instance.currentAnswer = 6;
-            UIMananger.instance.ActiveAnswerBasket();
-        }
-        else if (dough == false)
+        if (!dough)
         {
             Debug.Log("반죽을 먼저 만들어주세요.");
+            return;
         }
-      
+
+        // 공통: 재료 비활성화 + 반죽 비활성화 + 굽는 비주얼 활성화
+        Spider.SetActive(false);
+        Berry.SetActive(false);
+        Frog.SetActive(false);
+        Dough.SetActive(false);
+        BakeDough.SetActive(true);
+
+        // 어떤 빵을 굽는지 분기
+        if (SpiderCheese && FrogEye && !StarwBerry)
+        {
+            StartCoroutine(FinishBake(FrogPie, 1, "도넛이 구워졌습니다."));
+            BDoughnut = true;
+        }
+        else if (SpiderCheese && !FrogEye && !StarwBerry)
+        {
+            StartCoroutine(FinishBake(CheeseBread, 4, "치즈식빵이 구워졌습니다."));
+            CB = true;
+        }
+        else if (SpiderCheese && !FrogEye && StarwBerry)
+        {
+            StartCoroutine(FinishBake(PizzaBread, 2, "피자빵이 구워졌습니다."));
+            PB = true;
+        }
+        else if (!SpiderCheese && FrogEye && StarwBerry)
+        {
+            StartCoroutine(FinishBake(FruitCake, 3, "과일케이크가 구워졌습니다."));
+            FC = true;
+        }
+        else if (!SpiderCheese && !FrogEye && StarwBerry)
+        {
+            StartCoroutine(FinishBake(SBDoughnut, 5, "딸기 도넛이 구워졌습니다."));
+            SBD = true;
+        }
+        else if (!SpiderCheese && FrogEye && !StarwBerry)
+        {
+            StartCoroutine(FinishBake(SpiderMuffin, 6, "깍구리머핀이 구워졌습니다."));
+            SM = true;
+        }
+        else
+        {
+            Debug.Log("올바르지 않은 재료 조합입니다.");
+            BakeDough.SetActive(false);
+        }
     }
+
+    private IEnumerator FinishBake(GameObject bakedGood, int answerCode, string message)
+    {
+        yield return new WaitForSeconds(3f);
+
+        BakeDough.SetActive(false);
+        bakedGood.SetActive(true);
+
+
+        // 정답 코드 설정 및 UI 호출
+        GameManager.instance.currentAnswer = answerCode;
+        UIMananger.instance.ActiveAnswerBasket();
+        Debug.Log(message);
+
+        // 상태 초기화
+        dough = false;
+        SpiderCheese = false;
+        FrogEye = false;
+        StarwBerry = false;
+
+        BDoughnut = false;
+        PB = false;
+        FC = false;
+        CB = false;
+        SBD = false;
+        SM = false;
+    }
+
 
 }

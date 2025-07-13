@@ -15,6 +15,12 @@ public class ChangeImage1 : MonoBehaviour
         {
             targetImage.sprite = changedSprite;
             isOriginal = false;
+
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
         }
 
     }
